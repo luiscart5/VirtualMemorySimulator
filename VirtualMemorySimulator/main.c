@@ -61,6 +61,35 @@ int main(int argc, const char * argv[])
             printf("%d %d\n", theReference.address, theReference.access);
             events++;
             
+            int TLBhitB = 0;
+            int PageTableHitB = 0;
+            
+            for(int tableEntry = 0; tableEntry < TLBSIZE; tableEntry++ ){
+                if(data.address == TLB[tableEntry].pageNumber)
+                    TLBhitB = 1;
+                    }
+            if(TLBhitB == 1)
+                TLBhit();
+             else
+                {
+                  for(int pagetableEntry = 0; pagetableEntry < PAGETABLESIZE; pagetableEntry++ ){
+                         if(data.address == PAGETABLE[pagetableEntry].pageNumber)
+                            PageTableHitB = 1;
+                      }
+                          if(PageTableHitB == 1)
+                            PageTableHit();
+                          else
+                            MemoryAccess();
+                   }
+                    
+                  
+                
+                
+            
+            }
+            
+            
+            }
         }
     }
 }
